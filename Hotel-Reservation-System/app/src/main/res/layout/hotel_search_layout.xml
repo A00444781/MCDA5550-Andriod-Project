@@ -26,7 +26,7 @@
                 android:textSize="30sp"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="20dp"
-                android:textColor="@color/black"
+                android:textColor="@color/teal_700"
                 android:fontFamily="sans-serif-black"
                 android:textAlignment="center"
                 android:gravity="center_horizontal"/>
@@ -41,7 +41,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
-                android:textColor="@color/black"
+                android:textColor="@color/teal_700"
                 android:fontFamily="sans-serif"
                 android:textAlignment="textStart"
                 android:gravity="start"/>
@@ -64,7 +64,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
-                android:textColor="@color/black"
+                android:textColor="@color/teal_700"
                 android:fontFamily="sans-serif"
                 android:textAlignment="textStart"
                 android:gravity="start"/>
@@ -116,8 +116,9 @@
 
             <Button
                 android:id="@+id/confirm_my_search_button"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/teal_700"
                 android:text="CONFIRM MY SEARCH"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -126,9 +127,10 @@
 
             <Button
                 android:id="@+id/search_button"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="SEARCH"
+                android:backgroundTint="@color/teal_700"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="20dp"

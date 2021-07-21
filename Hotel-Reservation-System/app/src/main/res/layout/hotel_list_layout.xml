@@ -20,8 +20,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="Hotel Name"
+            android:fontFamily="sans-serif-black"
             android:textSize="20sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/teal_700"/>
 
         <TextView
             android:id="@+id/price_text_view"
@@ -40,10 +41,11 @@
             app:layout_constraintTop_toTopOf="@id/hotel_name_text_view"
             app:layout_constraintBottom_toBottomOf="@id/price_text_view"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="Price"
+            android:text="Available"
             android:layout_marginRight="10dp"
             android:textSize="20sp"
-            android:textColor="@color/black"/>
+            android:fontFamily="casual"
+            android:textColor="@color/purple_200"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

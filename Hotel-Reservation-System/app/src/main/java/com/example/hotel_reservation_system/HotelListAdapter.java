@@ -34,8 +34,16 @@ public class HotelListAdapter extends RecyclerView.Adapter<HotelListAdapter.View
     @Override
     public void onBindViewHolder(@NonNull HotelListAdapter.ViewHolder holder, int position) {
         String hotelName = hotelListData.get(position).getHotel_name();
-        String hotelPrice = String.valueOf(hotelListData.get(position).getPrice());
-        String hotelAvailability = String.valueOf(hotelListData.get(position).isAvailability());
+        String hotelPrice = String.valueOf(hotelListData.get(position).getPrice()) + "$ per night";
+        String hotelAvailability = new String();
+        if(hotelListData.get(position).isAvailability()==false){
+            hotelAvailability = "Not available";
+        }
+        else{
+            hotelAvailability = "Available";
+        }
+        // String hotelAvailability = String.valueOf(hotelListData.get(position).isAvailability());
+
         // set up the text
 
         holder.hotelName.setText(hotelName);
