@@ -35,7 +35,7 @@ public class HotelGuestListDetailsFragment extends Fragment {
         int hotelPrice = getArguments().getInt("hotel price");
         Boolean hotelAvailability = getArguments().getBoolean("hotel availability");
 
-        hotelRecapTextView.setText("You have selected" + hotelName + "at the price of " + hotelPrice + ", and the availability is " + hotelAvailability);
+        hotelRecapTextView.setText("You have selected " + hotelName + "at the price of " + "$" + hotelPrice + ", and the availability is " + hotelAvailability);
 
     }
 }

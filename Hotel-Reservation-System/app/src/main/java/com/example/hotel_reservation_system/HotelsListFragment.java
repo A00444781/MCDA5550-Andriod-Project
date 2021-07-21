@@ -50,7 +50,7 @@ public class HotelsListFragment extends Fragment implements ItemClickListener{
         String numberOfGuests = getArguments().getString("number of guests");
 
         //Set up the header
-        headingTextView.setText("Welcome user, displaying hotel for " + numberOfGuests + " guests staying from " + checkInDate +
+        headingTextView.setText("Welcome customer, displaying hotel for " + numberOfGuests + " guests staying from " + checkInDate +
                 " to " + checkOutDate);
 
         getHotelListData();

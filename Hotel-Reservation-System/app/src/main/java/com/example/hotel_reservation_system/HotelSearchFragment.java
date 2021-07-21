@@ -1,5 +1,7 @@
 package com.example.hotel_reservation_system;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,11 +25,17 @@ public class HotelSearchFragment extends Fragment {
     //global variables
     View view;
     ConstraintLayout mainLayout;
-    TextView titleTextView, searchTextConfirmationTextView;
+    TextView titleTextView, searchTextConfirmationTextView, nameEditText;
     EditText guestsCountEditText;
-    Button confirmSearchButton, searchButton;
+    Button confirmSearchButton, searchButton, retrieveButton, clearButton;
     DatePicker checkInDatePicker, checkOutDatePicker;
-    String checkInDate, checkOutDate, numberOfGuests;
+    String checkInDate, checkOutDate, numberOfGuests, guestName;
+
+    // Declaration of shared preference
+    SharedPreferences sharedPreferences;
+    public static final String myPreference = "myPref";
+    public static final String name = "nameKey";
+    public static final String guestsCount = "guestsCount";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,30 +52,54 @@ public class HotelSearchFragment extends Fragment {
         mainLayout = view.findViewById(R.id.main_layout);
         titleTextView = view.findViewById(R.id.title_text_view);
         searchTextConfirmationTextView = view.findViewById(R.id.search_confirm_text_view);
-
         guestsCountEditText = view.findViewById(R.id.guests_count_edit_text);
-
         confirmSearchButton = view.findViewById(R.id.confirm_my_search_button);
         searchButton = view.findViewById(R.id.search_button);
-
         checkInDatePicker = view.findViewById(R.id.checkin_date_picker_view);
         checkOutDatePicker = view.findViewById(R.id.checkout_date_picker_view);
+
+        //for Shared Pref
+        nameEditText = view.findViewById(R.id.name_edit_text);
+        retrieveButton = view.findViewById(R.id.retrieve_button);
+        clearButton = view.findViewById(R.id.clear_button);
 
         //set Title Text
         titleTextView.setText(R.string.welcome_text);
 
         //Set up the text of confirm text box
-        confirmSearchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkInDate = getDateFromCalendar(checkInDatePicker);
-                checkOutDate = getDateFromCalendar(checkOutDatePicker);
-                //Get input of guests count
-                numberOfGuests = guestsCountEditText.getText().toString();
+        confirmSearchButton.setOnClickListener(v -> {
+            checkInDate = getDateFromCalendar(checkInDatePicker);
+            checkOutDate = getDateFromCalendar(checkOutDatePicker);
+            //Get input of guests count
+            numberOfGuests = guestsCountEditText.getText().toString();
+            guestName = nameEditText.getText().toString();
 
-                searchTextConfirmationTextView.setText("Dear Customer, Your check in date is " + checkInDate + ", " +
-                        "your checkout date is " + checkOutDate + ".The number of guests are " + numberOfGuests);
+            searchTextConfirmationTextView.setText("Dear Customer, Your check in date is " + checkInDate + ", " +
+                    "your checkout date is " + checkOutDate + ".The number of guests are " + numberOfGuests);
+
+            // saving into shared preferences
+            sharedPreferences = getActivity().getSharedPreferences(myPreference, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(name,guestName);
+            editor.putString(guestsCount,numberOfGuests);
+            editor.commit();
+        });
+
+        retrieveButton.setOnClickListener(v -> {
+            sharedPreferences =getActivity().getSharedPreferences(myPreference, Context.MODE_PRIVATE);
+
+            if(sharedPreferences.contains(name)){
+                nameEditText.setText(sharedPreferences.getString(name,"Not set yet"));
             }
+
+            if(sharedPreferences.contains(guestsCount)){
+                guestsCountEditText.setText(sharedPreferences.getString(guestsCount,"Not set yet"));
+            }
+        });
+
+        clearButton.setOnClickListener(v -> {
+                guestsCountEditText.setText("");
+                nameEditText.setText("");
         });
 
         //Search Button click Listener

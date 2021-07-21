@@ -87,7 +87,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
-                android:textColor="@color/black"
+                android:textColor="@color/teal_700"
                 android:fontFamily="sans-serif"
                 android:textAlignment="textStart"
                 android:gravity="start"/>
@@ -104,15 +104,41 @@
                 android:inputType="number" />
 
             <TextView
+                android:id="@+id/name_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter your Name"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@id/guests_text_view"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/teal_700"
+                android:fontFamily="sans-serif"
+                android:textAlignment="textStart"
+                android:gravity="start"/>
+
+            <EditText
+                android:id="@+id/name_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/name_text_view"
+                app:layout_constraintTop_toTopOf="@id/name_text_view"
+                app:layout_constraintBottom_toBottomOf="@id/name_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:hint="Your Name"
+                android:inputType="text" />
+
+            <TextView
                 android:id="@+id/search_confirm_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                app:layout_constraintStart_toStartOf="@id/guests_text_view"
+                app:layout_constraintStart_toStartOf="@id/name_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/guests_text_view"/>
+                app:layout_constraintTop_toBottomOf="@id/name_text_view"/>
 
             <Button
                 android:id="@+id/confirm_my_search_button"
@@ -135,6 +161,28 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="20dp"
                 app:layout_constraintTop_toBottomOf="@id/confirm_my_search_button"/>
+
+            <Button
+                android:id="@+id/clear_button"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="CLEAR"
+                android:backgroundTint="@color/teal_700"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/search_button"/>
+
+            <Button
+                android:id="@+id/retrieve_button"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="Retrieve From Shared Pref"
+                android:backgroundTint="@color/teal_700"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/clear_button"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
