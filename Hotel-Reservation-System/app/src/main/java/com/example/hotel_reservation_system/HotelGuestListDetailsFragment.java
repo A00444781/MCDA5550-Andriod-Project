@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,8 @@ import org.jetbrains.annotations.NotNull;
 public class HotelGuestListDetailsFragment extends Fragment {
 
     View view;
+    TextView hotel_name_text_view, check_in_text_view, check_out_text_view, hotel_price_text_view;
+    Button submit_button;
 
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -29,13 +32,22 @@ public class HotelGuestListDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
-        TextView hotelRecapTextView = view.findViewById(R.id.hotel_recap_text_view);
+        hotel_name_text_view = view.findViewById(R.id.hotel_name_text_view);
+        check_in_text_view = view.findViewById(R.id.check_in_text_view);
+        check_out_text_view = view.findViewById(R.id.check_out_text_view);
+        hotel_price_text_view = view.findViewById(R.id.hotel_price_text_view);
+        submit_button = view.findViewById(R.id.submit_button);
 
         String hotelName = getArguments().getString("hotel name");
-        int hotelPrice = getArguments().getInt("hotel price");
-        Boolean hotelAvailability = getArguments().getBoolean("hotel availability");
+        String hotelPrice = String.valueOf(getArguments().getInt("hotel price")) + "$";
+        //Boolean hotelAvailability = getArguments().getBoolean("hotel availability");
+        String checkInDate = getArguments().getString("check in date");
+        String checkOutDate = getArguments().getString("check out date");
 
-        hotelRecapTextView.setText("You have selected " + hotelName + "at the price of " + "$" + hotelPrice + ", and the availability is " + hotelAvailability);
+        hotel_name_text_view.setText(hotelName);
+        check_in_text_view.setText(checkInDate);
+        check_out_text_view.setText(checkOutDate);
+        hotel_price_text_view.setText(hotelPrice);
 
     }
 }

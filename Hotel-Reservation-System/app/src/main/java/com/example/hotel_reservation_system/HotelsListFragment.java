@@ -14,8 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.Callback;
@@ -97,10 +95,17 @@ public class HotelsListFragment extends Fragment implements ItemClickListener{
         int price = hotelListData.getPrice();
         boolean availability = hotelListData.isAvailability();
 
+        String checkInDate = getArguments().getString("check in date");
+        String checkOutDate = getArguments().getString("check out date");
+        String numberOfGuests = getArguments().getString("number of guests");
+
         Bundle bundle = new Bundle();
         bundle.putString("hotel name", hotelName);
         bundle.putInt("hotel price", price);
         bundle.putBoolean("hotel availability", availability);
+        bundle.putString("check in date", checkInDate);
+        bundle.putString("check out date", checkOutDate);
+        bundle.putString("number of guests", numberOfGuests);
 
         HotelGuestListDetailsFragment hotelGuestListDetailsFragment = new HotelGuestListDetailsFragment();
         hotelGuestListDetailsFragment.setArguments(bundle);
@@ -110,6 +115,7 @@ public class HotelsListFragment extends Fragment implements ItemClickListener{
         fragmentTransaction.replace(R.id.main_layout, hotelGuestListDetailsFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+
 
     }
 }
