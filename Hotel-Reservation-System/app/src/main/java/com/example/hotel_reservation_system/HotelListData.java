@@ -1,6 +1,6 @@
 package com.example.hotel_reservation_system;
 
-//create data model
+//create data model for hotel list recycler view
 public class HotelListData {
 
     String hotel_name;

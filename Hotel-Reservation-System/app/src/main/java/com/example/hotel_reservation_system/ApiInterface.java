@@ -13,6 +13,6 @@ public interface ApiInterface {
     @GET("/hotelList")
     public void getHotelLists(Callback<List<HotelListData>> callback);
 
-//    @POST("reservation")
-//    public void getConfirmationNumber(Callback<List<HotelListData>> callback);
+    @POST("reservation")
+    public void getConfirmationNumber(Callback<List<HotelListData>> callback);
 }

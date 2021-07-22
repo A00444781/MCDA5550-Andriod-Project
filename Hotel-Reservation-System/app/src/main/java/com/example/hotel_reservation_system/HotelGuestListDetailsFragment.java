@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -18,6 +20,7 @@ public class HotelGuestListDetailsFragment extends Fragment {
     View view;
     TextView hotel_name_text_view, check_in_text_view, check_out_text_view, hotel_price_text_view;
     Button submit_button;
+    Integer guests_number;
 
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -40,14 +43,21 @@ public class HotelGuestListDetailsFragment extends Fragment {
 
         String hotelName = getArguments().getString("hotel name");
         String hotelPrice = String.valueOf(getArguments().getInt("hotel price")) + "$";
-        //Boolean hotelAvailability = getArguments().getBoolean("hotel availability");
         String checkInDate = getArguments().getString("check in date");
         String checkOutDate = getArguments().getString("check out date");
+        //save guests number into model
+        guests_number = Integer.valueOf(getArguments().getString("number of guests"));
+
 
         hotel_name_text_view.setText(hotelName);
         check_in_text_view.setText(checkInDate);
         check_out_text_view.setText(checkOutDate);
         hotel_price_text_view.setText(hotelPrice);
+
+        RecyclerView recyclerView = view.findViewById(R.id.guests_list_recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        GuestListAdapter guestListAdapter = new GuestListAdapter(getActivity(),guests_number);
+        recyclerView.setAdapter(guestListAdapter);
 
     }
 }
