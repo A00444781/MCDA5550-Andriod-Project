@@ -92,6 +92,21 @@
                 android:textAlignment="textStart"
                 android:gravity="start"/>
 
+            <TextView
+                android:id="@+id/red_asterisk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="*"
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@id/checkout_date_picker_view"
+                app:layout_constraintStart_toEndOf="@+id/guests_text_view"
+                android:layout_marginTop="20dp"
+
+                android:textColor="@android:color/holo_red_dark"
+                android:fontFamily="sans-serif"
+                android:textAlignment="textStart"
+                android:gravity="start"/>
+
             <EditText
                 android:id="@+id/guests_count_edit_text"
                 android:layout_width="wrap_content"

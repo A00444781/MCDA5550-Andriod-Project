@@ -27,7 +27,7 @@ public class HotelSearchFragment extends Fragment {
     //global variables
     View view;
     ConstraintLayout mainLayout;
-    TextView titleTextView, searchTextConfirmationTextView, nameEditText;
+    TextView titleTextView, searchTextConfirmationTextView, nameEditText, redAsterisk;
     EditText guestsCountEditText;
     Button confirmSearchButton, searchButton, retrieveButton, clearButton;
     DatePicker checkInDatePicker, checkOutDatePicker;
@@ -59,6 +59,7 @@ public class HotelSearchFragment extends Fragment {
         searchButton = view.findViewById(R.id.search_button);
         checkInDatePicker = view.findViewById(R.id.checkin_date_picker_view);
         checkOutDatePicker = view.findViewById(R.id.checkout_date_picker_view);
+        redAsterisk = view.findViewById(R.id.red_asterisk);
 
         //for Shared Pref
         nameEditText = view.findViewById(R.id.name_edit_text);
