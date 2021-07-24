@@ -16,9 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HotelsListFragment extends Fragment implements ItemClickListener{
 
@@ -57,19 +57,37 @@ public class HotelsListFragment extends Fragment implements ItemClickListener{
     public void getHotelListData(){
 
         progressBar.setVisibility(View.VISIBLE);
-        Api.getClient().getHotelLists(new Callback<List<HotelListData>>() {
+//        Api.getClient().getHotelLists(new Callback<List<HotelListData>>() {
+//            @Override
+//            public void success(List<HotelListData> userListResponse, Response response) {
+//                //map variables from backend to local list
+//                userListResponseData = userListResponse;
+//
+//                setupRecyclerView();
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error) {
+//                progressBar.setVisibility(View.GONE);
+//                Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
+//
+//            }
+//        });
+        Api.getClient().getHotelsList().enqueue(new Callback<List<HotelListData>>() {
             @Override
-            public void success(List<HotelListData> userListResponse, Response response) {
+            public void onResponse(Call<List<HotelListData>> call, Response<List<HotelListData>> response) {
                 //map variables from backend to local list
-                userListResponseData = userListResponse;
-
+//                userListResponseData = userListResponse;
+                progressBar.setVisibility(View.GONE);
+                List<HotelListData> userListData = response.body();
+                userListResponseData = userListData;
                 setupRecyclerView();
             }
 
             @Override
-            public void failure(RetrofitError error) {
+            public void onFailure(Call<List<HotelListData>> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),t.toString(),Toast.LENGTH_LONG).show();
 
             }
         });

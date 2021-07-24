@@ -12,14 +12,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.FragmentTransaction;
 
 import org.jetbrains.annotations.NotNull;
 
 public class HotelGuestListDetailsFragment extends Fragment {
 
     View view;
-    TextView hotel_name_text_view, check_in_text_view, check_out_text_view, hotel_price_text_view;
-    Button submit_button;
+    TextView hotel_name_text_view, check_in_text_view, check_out_text_view, hotel_price_text_view, temp_confirmation_number_text_view;
+    Button submit_button, next_page_button;
     Integer guests_number;
 
     @Nullable
@@ -35,10 +36,12 @@ public class HotelGuestListDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
-        hotel_name_text_view = view.findViewById(R.id.hotel_name_text_view);
-        check_in_text_view = view.findViewById(R.id.check_in_text_view);
-        check_out_text_view = view.findViewById(R.id.check_out_text_view);
+        hotel_name_text_view = view.findViewById(R.id.guest_hotel_name_text_view);
+        check_in_text_view = view.findViewById(R.id.guest_check_in_text_view);
+        check_out_text_view = view.findViewById(R.id.guest_check_out_text_view);
         hotel_price_text_view = view.findViewById(R.id.hotel_price_text_view);
+        temp_confirmation_number_text_view = view.findViewById(R.id.temp_confirmation_number_text_view);
+        next_page_button = view.findViewById(R.id.next_page_button);
         submit_button = view.findViewById(R.id.submit_button);
 
         String hotelName = getArguments().getString("hotel name");
@@ -58,6 +61,26 @@ public class HotelGuestListDetailsFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         GuestListAdapter guestListAdapter = new GuestListAdapter(getActivity(),guests_number);
         recyclerView.setAdapter(guestListAdapter);
+
+        next_page_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String confirmationId = temp_confirmation_number_text_view.getText().toString();
+                Bundle bundle = new Bundle();
+                bundle.putString("confirmationId", confirmationId);
+                HotelGuestListDetailsFragment hotelGuestListDetailsFragment = new HotelGuestListDetailsFragment();
+                hotelGuestListDetailsFragment.setArguments(bundle);
+
+                ConfirmationNumberFragment confirmationNumberFragment = new ConfirmationNumberFragment();
+                confirmationNumberFragment.setArguments(bundle);
+
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.main_layout,confirmationNumberFragment);
+                fragmentTransaction.remove(HotelGuestListDetailsFragment.this);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
 
     }
 }

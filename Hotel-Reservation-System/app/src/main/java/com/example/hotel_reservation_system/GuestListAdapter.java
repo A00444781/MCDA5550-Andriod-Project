@@ -3,7 +3,6 @@ package com.example.hotel_reservation_system;
 import android.app.Activity;
 import android.content.Context;
 import android.text.Editable;
-import android.text.Layout;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,7 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.ViewHolder> {
 
@@ -30,8 +32,9 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.View
     private int numberOfGuests;
     ArrayList<String> guestsNameArray = new ArrayList<>();
     ArrayList<String> guestGenderArray = new ArrayList<>();
-    Button submitButton;
+    Button submitButton, nextPageButton;
     Context context;
+    TextView check_in_text_view, check_out_text_view, hotel_name_text_view, temp_confirmation_number_text_view;
 
     boolean isOnTextChanged = false;
 
@@ -44,9 +47,15 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.View
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = layoutInflater.inflate(R.layout.hotel_guest_details_layout, parent, false);
-
+        context = parent.getContext();
         rootView = ((Activity) context).getWindow().getDecorView().findViewById(android.R.id.content);
         submitButton = rootView.findViewById(R.id.submit_button);
+        nextPageButton = rootView.findViewById(R.id.next_page_button);
+        check_in_text_view = rootView.findViewById(R.id.guest_check_in_text_view);
+        check_out_text_view = rootView.findViewById(R.id.guest_check_out_text_view);
+        hotel_name_text_view = rootView.findViewById(R.id.guest_hotel_name_text_view);
+        temp_confirmation_number_text_view = rootView.findViewById(R.id.temp_confirmation_number_text_view);
+
 
         return new ViewHolder(view);
     }
@@ -113,12 +122,41 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.View
                 Log.d("guest gender", guestGenderArray.toString());
             }
         });
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ReservationDetails reservationDetails = new ReservationDetails(hotel_name_text_view.getText().toString(), check_in_text_view.getText().toString(), check_out_text_view.getText().toString());
+                //Guest guest = new Guest(name, gender);
+                for (int i = 0; i < numberOfGuests; i++){
+                    Guest guest = new Guest(guestsNameArray.get(i), Integer.valueOf(guestGenderArray.get(i)));
+                    reservationDetails.addGuest(guest);
+                }
+
+                Api.getClient().getConfirmationId(reservationDetails).enqueue(new Callback<Integer>() {
+                    @Override
+                    public void onResponse(Call<Integer> call, Response<Integer> response) {
+                        int confirmationId = response.body();
+                        //Log.d("confirmation number", String.valueOf(confirmationId));
+                        temp_confirmation_number_text_view.setText(String.valueOf(confirmationId));
+                    }
+
+                    @Override
+                    public void onFailure(Call<Integer> call, Throwable t) {
+
+                    }
+                });
+
+                submitButton.setVisibility(View.GONE);
+                nextPageButton.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-
-        return numberOfGuests;
+            return numberOfGuests;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

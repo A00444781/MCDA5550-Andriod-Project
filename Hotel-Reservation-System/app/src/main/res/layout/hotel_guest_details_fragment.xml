@@ -31,7 +31,7 @@
         android:gravity="start"/>
 
     <TextView
-        android:id="@+id/hotel_name_text_view"
+        android:id="@+id/guest_hotel_name_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/hotelName_text_view"
@@ -57,10 +57,10 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/check_in_text_view"
+        android:id="@+id/guest_check_in_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/hotel_name_text_view"
+        app:layout_constraintStart_toStartOf="@id/guest_hotel_name_text_view"
         app:layout_constraintTop_toTopOf="@id/checkIn_text_view"
         app:layout_constraintBottom_toBottomOf="@id/checkIn_text_view"
         android:textSize="20sp"
@@ -82,11 +82,11 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/check_out_text_view"
+        android:id="@+id/guest_check_out_text_view"
         android:text="28-07-2021"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/check_in_text_view"
+        app:layout_constraintStart_toStartOf="@id/guest_hotel_name_text_view"
         app:layout_constraintTop_toTopOf="@id/checkOut_text_view"
         app:layout_constraintBottom_toBottomOf="@id/checkOut_text_view"
         android:textSize="20sp"
@@ -154,6 +154,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/guests_list_recyclerView"/>
+    <Button
+        android:id="@+id/next_page_button"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Check My Confirmation Number"
+        android:backgroundTint="@color/teal_700"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/guests_list_recyclerView"
+        android:visibility="gone"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/temp_confirmation_number_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/submit_button"
+        tools:text="temp number"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

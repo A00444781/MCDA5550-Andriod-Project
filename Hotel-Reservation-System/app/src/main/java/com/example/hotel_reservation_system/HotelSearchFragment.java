@@ -3,6 +3,7 @@ package com.example.hotel_reservation_system;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -111,22 +113,22 @@ public class HotelSearchFragment extends Fragment {
                 //Get input of guests count
                 numberOfGuests = guestsCountEditText.getText().toString();
 
-                Bundle bundle = new Bundle();
-                bundle.putString("check in date", checkInDate);
-                bundle.putString("check out date", checkOutDate);
-                bundle.putString("number of guests", numberOfGuests);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("check in date", checkInDate);
+                    bundle.putString("check out date", checkOutDate);
+                    bundle.putString("number of guests", numberOfGuests);
 
 
-                // set Fragment class Arguments
-                HotelsListFragment hotelsListFragment = new HotelsListFragment();
-                hotelsListFragment.setArguments(bundle);
+                    // set Fragment class Arguments
+                    HotelsListFragment hotelsListFragment = new HotelsListFragment();
+                    hotelsListFragment.setArguments(bundle);
 
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.main_layout, hotelsListFragment);
-                fragmentTransaction.remove(HotelSearchFragment.this);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.main_layout, hotelsListFragment);
+                    fragmentTransaction.remove(HotelSearchFragment.this);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
         });
     }
 
