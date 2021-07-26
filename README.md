@@ -1,5 +1,6 @@
 # MCDA5550-Andriod-Project
-Hotel Reservation System
+
+Hotel Reservation System by Ziwei Liu A00444781
 
 This Andriod aoo demo intergrated front end layout and back end service call. Thanks for Kanngi and Sanjeevi's detailed tutorial which gave me a perfect kickoff in mobile app development.
 
